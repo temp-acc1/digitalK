@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-    <div class="container">
+{%extends 'base.html'%}
+{%block main%}
+    <div class="container" align="center" margin : auto>
         <form method="POST">
         	{% csrf_token %}
-        	{{form.as_p}}
-        	<button type="submit">submit</button>
+        	<input name="username" class="form-control" placeholder="username"><br>
+    		<input name="password" type="password" class="form-control" placeholder="password"><br>
+    		<button type="submit" class="btn btn-primary">submit</button>
         </form>
-
     </div>
-</body>
-</html>
+{%endblock%}

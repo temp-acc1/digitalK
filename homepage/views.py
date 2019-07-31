@@ -7,14 +7,13 @@ from homepage.models import Student, Teacher
 
 # Create your views here.
 def home(request):
-	return render(request,'home.html',{
-		'students':Student.objects.all()
-		})
+	return render(request,'home.html')
 
 
 def login(request):
 	if request.method == 'POST':
-		form = AuthenticationForm(request)
-		return HttpResponse(request)
+		username = request.POST['username']
+		password = request.POST['password']
+		return HttpResponse(username)
 	form = AuthenticationForm()
 	return render(request, 'login.html',{"form":form})
