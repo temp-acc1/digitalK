@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Student(models.Model):
 	name=models.CharField(max_length=80)	#name of student
 	group=models.CharField(max_length=3)	#otryad
-	vallet=models.IntegerField()			#amount of kuhmarka
+	wallet=models.IntegerField()			#amount of kuhmarka
 
 
 class Teacher(models.Model):
