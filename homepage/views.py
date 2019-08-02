@@ -19,5 +19,5 @@ def login_page(request):
 		us = authenticate(request,username=usname, password=pasword)
 		if us is not None:
 			login(request,us)
-			return render(request, 'login.html',{'check':request.user.is_authenticated}) #redirect()
-	return render(request, 'login.html',{'check':request.user.is_authenticated})
+			return redirect('/') #redirect()
+	return render(request, 'login.html')
