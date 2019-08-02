@@ -15,7 +15,7 @@ GROUP_CHOICES = (
 class Student(models.Model):
 	name=models.CharField(max_length=80)
 	group=models.CharField(max_length=3, choices=GROUP_CHOICES)
-	vallet=models.IntegerField()
+	wallet=models.IntegerField()
 	age=models.IntegerField()
 
 
