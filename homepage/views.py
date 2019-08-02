@@ -8,7 +8,6 @@ from homepage.models import Student, Teacher
 from django.contrib.auth.models import User
 # Create your views here.
 def home(request):
-	print(request.user.is_authenticated)
 	return render(request,'home.html',{'logged':request.user.is_authenticated})
 
 
@@ -19,5 +18,7 @@ def login_page(request):
 		us = authenticate(request,username=usname, password=pasword)
 		if us is not None:
 			login(request,us)
-			return redirect('/') #redirect()
-	return render(request, 'login.html')
+			return redirect('/')
+		else:
+			return render(request,'login.html',{'errors':"There's no such user. Try again!"})
+	return render(request, 'login.html',{'errors':''})
