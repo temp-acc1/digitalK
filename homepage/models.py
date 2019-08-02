@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Student(models.Model):
-	name=models.CharField(max_length=80)	#name of student
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	group=models.CharField(max_length=3)	#otryad
 	wallet=models.IntegerField()			#amount of kuhmarka
 
@@ -15,3 +15,6 @@ class Student(models.Model):
 class Teacher(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	subject=models.CharField(max_length=40)
+
+
+#class Teachers(models.Group):

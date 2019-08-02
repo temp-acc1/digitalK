@@ -2,23 +2,22 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import render
+from django.contrib.auth import authenticate,login
+from django.shortcuts import render, redirect
 from homepage.models import Student, Teacher
-import hashlib
+from django.contrib.auth.models import User
 # Create your views here.
 def home(request):
-	return render(request,'home.html')
+	print(request.user.is_authenticated)
+	return render(request,'home.html',{'logged':request.user.is_authenticated})
 
 
-def login(request):
+def login_page(request):
 	if request.method == 'POST':
-		username = request.POST['username']
-		password = request.POST['password']
-		users = Teacher.objects.all()
-		for user in users:
-			print(user.user.password)
-			print(hash(password))
-			print(user.user.password==hash(password))
-		return HttpResponse("s")
-	form = AuthenticationForm()
-	return render(request, 'login.html',{"form":form})
+		usname = request.POST['username']
+		pasword = request.POST['password']
+		us = authenticate(request,username=usname, password=pasword)
+		if us is not None:
+			login(request,us)
+			return render(request, 'login.html',{'check':request.user.is_authenticated}) #redirect()
+	return render(request, 'login.html',{'check':request.user.is_authenticated})
