@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%block main%}
+<div align="middle">
+	<form method="POST">
+		{% csrf_token %}
+		<div class="input-group">
+			<div class="input-group-prepend">
+		    	<span class="input-group-text">First and last name</span>
+			</div>
+	  		<input type="text" name="first" aria-label="First name" class="form-control">
+		  	<input type="text" name="last" aria-label="Last name" class="form-control">
+		</div>
+		<br>
+		<input type="text" name="username" placeholder="Username" class="form-control">
+		<br>
+		<input type="text" name="email" placeholder="Email" class="form-control">
+		<br>
+		<input type="password" name="password" placeholder="Password" class="form-control">
+		<br>
+		<input type="text" name="subject" placeholder="Subject" class="form-control">
+		<br>
+      	<button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+      	<br>
+	</form>
+	    {%if errors != "" %}
+    <div class="alert alert-danger alert-dismissible fade show">
+    	{{errors}}
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>
+    {%endif%}
+</div>
+{%endblock%}
