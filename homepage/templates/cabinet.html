@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%block main%}
+{%if request.user.is_authenticated%}
+<dev class="text-align-middle">
+	<h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+	{%if class%}
+			<form method="POST">
+				{%csrf_token%}
+				<button type="submit" action="topup" class="btn btn-primary">top up kuh$marks</button>
+			</form>
+	{%else%}
+	kuh$markas: {{request.user.student.wallet}}<br>
+	<div class="container">
+		<form method="POST">
+			{%csrf_token%}
+			<button type="submit" action="transfer" class="btn btn-primary">transfer kuh$marks</button>
+		</form>
+	</div>
+	{%endif%}
+
+	<h5><a href="/logout">log out</a></h5>
+{%else%}
+<h1>Access denied!</h1>
+<br><h4>You should log in!</h4>
+<small><a href="/login">go and log in</a></small>
+{%endif%}
+{%endblock%}

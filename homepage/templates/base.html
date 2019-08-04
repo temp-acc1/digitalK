@@ -7,7 +7,11 @@
 </head>
 <body>
 	<header class="navbar navbar-nav bg-primary text-white" ><nav>navbar
-		<button type="button" class="btn btn-outline-light">Light</button>
+		{%if request.user.is_authenticated%}
+		<a href="/cabinet"><button type="button" class="btn btn-outline-light">cabinet</button></a>
+		{%else%}
+		<a href="/login"><button type="button" class="btn btn-outline-light">Log in</button></a>
+		{%endif%}
 	</nav></header>
 	<div class="container col-2"></div>
 	<div class="container col-7">{%block main%}{%endblock%}</div>
