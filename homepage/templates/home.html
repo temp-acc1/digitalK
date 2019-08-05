@@ -1,10 +1,25 @@
 {%extends 'base.html'%}
 {%block main%}
-<a href="login/">cd</a><br>
-<a href="/">cd</a><br>
-{%if logged == True%}
-<br>......logged!
-{%else%}
-<br>......you should log in!
-{%endif%}
+<div>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Имя</th>
+			<th scope="col">Фамилия</th>
+			<th scope="col">Отряд</th>
+			<th scope="col">Баланс</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for us in users %}
+<tr>
+	<td>{{us.user.first_name}}</td>
+	<td>{{us.user.last_name}}</td>
+	<td>{{us.group}}</td>
+	<td>{{us.wallet}}</td>
+</tr>
+{%endfor%}
+</tbody>
+</table>
+</div>
 {%endblock%}

@@ -8,12 +8,13 @@ from homepage.models import Student, Teacher
 from django.contrib.auth.models import User
 # Create your views here.
 def home(request):
+	users = Student.objects.all()
 	try:
 		a = request.user.Student.wallet
 	except:
-		return render(request,'home.html',{'request':request,'class':True})
+		return render(request,'home.html',{'request':request,'class':True,'users':users})
 	else:
-		return render(request,'home.html',{'request':request,'class':False})
+		return render(request,'home.html',{'request':request,'class':False,'users':users})
 
 
 def login_page(request):
@@ -25,7 +26,7 @@ def login_page(request):
 			login(request,us)
 			return redirect('/')
 		else:
-			return render(request,'login.html',{'errors':"There's no such user. Try again!",'request':request})
+			return render(request,'login.html',{'errors':"Нет такого пользователя",'request':request})
 	return render(request, 'login.html',{'errors':''})
 
 
@@ -38,26 +39,46 @@ def logout_page(request):
 
 
 def accpage(request):
-	if request.method=='GET':
-		try:
-			a = request.user.student.wallet
-		except:
-			return render(request,'cabinet.html',{'request':request,'class':True})
-		else:
-			return render(request,'cabinet.html',{'request':request,'class':False})
+	try:
+		a = request.user.teacher
+	except:
+		a = False
 	else:
-		if request.POST.get('transfer'):
-			return HttpResponse('t')
-		elif request.POST.get('top_up'):
-			return HttpResponse('u')
+		a = True
+	users = Student.objects.all()
+	return render(request,'cabinet.html',{
+	'request':request,
+	'class':a,
+	'students':users
+	})
+
 
 def transfer(request):
-	return HttpResponse('t')
-
+	if request.method == 'POST':
+		count = request.POST['count']
+		touser = User.objects.get(id=request.POST['who'])
+		who = Student.objects.get(user=touser)
+		me = Student.objects.get(user=request.user)
+		if me.wallet > int(count):
+			me.wallet = me.wallet - int(count)
+			who.wallet = who.wallet + int(count)
+			me.save()
+			who.save()
+		return redirect('/cabinet')
+	else:
+		return HttpResponse(404)
 
 
 def topup(request):
-	return HttpResponse('U')
+	if request.method == 'POST':
+		count = request.POST['count']
+		touser = User.objects.get(id=request.POST['who'])
+		who = Student.objects.get(user=touser)
+		who.wallet+=int(count)
+		who.save()
+		return redirect('/cabinet')
+	else:
+		return HttpResponse(404)
 
 #else:
 """

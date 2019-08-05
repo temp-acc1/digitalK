@@ -4,24 +4,45 @@
 <dev class="text-align-middle">
 	<h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
 	{%if class%}
-			<form method="POST">
-				{%csrf_token%}
-				<button type="submit" action="topup" class="btn btn-primary">top up kuh$marks</button>
-			</form>
+	<small>Учитель</small><br>
+	<h5>Кафедра: {{request.user.teacher.subject}}</h5>
+		<form action='/topup/' method='POST'>
+			{% csrf_token %}
+			<div class="form-group">
+			    <label for="exampleInputEmail1">Количество Кухмарок</label>
+			    <input class="form-control" name="count">
+			</div>
+			<select class="custom-select" name="who">
+			{% for student in students %}
+			  <option value="{{student.user.id}}">{{student.user.first_name}} {{student.user.last_name}}</option>
+			{% endfor %}			  
+			</select>
+			<p><button class="btn btn-primary" type='submit'>Пополнить</button></p>
+		</form>
 	{%else%}
+	<small>ученик</small>
 	kuh$markas: {{request.user.student.wallet}}<br>
 	<div class="container">
-		<form method="POST">
-			{%csrf_token%}
-			<button type="submit" action="transfer" class="btn btn-primary">transfer kuh$marks</button>
+		<form action='/transfer/' method='POST'>
+			{% csrf_token %}
+			<div class="form-group">
+			    <label for="exampleInputEmail1">Количество Кухмарок</label>
+			    <input class="form-control" name="count">
+			</div>
+			<select class="custom-select" name="who">
+			{% for student in students %}
+			  <option value="{{student.user.id}}">{{student.user.first_name}} {{student.user.last_name}}</option>
+			{% endfor %}			  
+			</select>
+			<p><button class="btn btn-primary" type='submit'>Перевести</button></p>
 		</form>
 	</div>
 	{%endif%}
 
-	<h5><a href="/logout">log out</a></h5>
+	<small><a href="/logout">Выйти</a></small>
 {%else%}
-<h1>Access denied!</h1>
-<br><h4>You should log in!</h4>
-<small><a href="/login">go and log in</a></small>
+<h1>Доступ запрещён!</h1>
+<br><h4>Вы не вошли в аккаунт!</h4>
+<small><a href="/login">Войдите в аккаунт</a></small>
 {%endif%}
 {%endblock%}

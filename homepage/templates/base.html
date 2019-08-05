@@ -6,11 +6,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-	<header class="navbar navbar-nav bg-primary text-white" ><nav>navbar
+	<header class="navbar navbar-expand-lg bg-primary text-white" ><nav><a class="navbar-brand text-white" href="/">МДКЦ</a>
 		{%if request.user.is_authenticated%}
-		<a href="/cabinet"><button type="button" class="btn btn-outline-light">cabinet</button></a>
+		<a href="/cabinet"><button type="button" class="btn btn-sm btn-outline-light">Кабинет</button></a>
 		{%else%}
-		<a href="/login"><button type="button" class="btn btn-outline-light">Log in</button></a>
+		<a href="/login"><button type="button" class="btn btn-sm btn-outline-light">Войти</button></a>
 		{%endif%}
 	</nav></header>
 	<div class="container col-2"></div>

@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 
 GROUP_CHOICES = (
 	('B1', 'B1'),
-	('B1', 'B2'),
-	('B1', 'C1'),
-	('B1', 'C2'),
+	('B2', 'B2'),
+	('C1', 'C1'),
+	('C2', 'C2'),
 	)
 
 # Create your models here.

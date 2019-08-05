@@ -1,13 +1,13 @@
 {%extends 'base.html'%}
 {%block main%}
     <div class="container" align="center" margin : auto>
+        <br>
         <form method="POST">
         	{% csrf_token %}
-        	<input name="username" class="form-control" placeholder="username"><br>
-    		<input name="password" type="password" class="form-control" placeholder="password"><br>
-    		<button type="submit" class="btn btn-primary">submit</button>
+        	<input name="username" class="form-control" placeholder="Имя пользователя"><br>
+    		<input name="password" type="password" class="form-control" placeholder="Пароль"><br>
+    		<button type="submit" class="btn btn-primary">Войти</button>
         </form>
-        <small><a href="/registration">register</a></small>
     </div>
     {%if errors != "" %}
     <div class="alert alert-danger alert-dismissible fade show">
